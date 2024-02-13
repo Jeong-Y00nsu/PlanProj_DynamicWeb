@@ -235,11 +235,11 @@ public class MembersRepository {
 			
 			int result = stmt.executeUpdate(query);
 			if(result ==1) {
-				System.out.println("Member ������ ���� ����");
+				System.out.println("Member 테이블 추가 성공");
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("Member ������ ���� ����");
+			System.out.println("Member 테이블에 데이터 추가 실패");
 		} finally {
 			try {
 				if(stmt!=null&&!stmt.isClosed()) {
@@ -273,10 +273,10 @@ public class MembersRepository {
 			
 			int result = stmt.executeUpdate();
 			if(result==1) {
-				System.out.println("Member ������ ���� ����");
+				System.out.println("Member 테이블에서 데이터 삭제 성공");
 			}
 		} catch(SQLException e) {
-			System.out.println("Member ������ ���� ����");
+			System.out.println("Member 테이블에 데이터 삭제 실패");
 			e.printStackTrace();
 			
 		} finally {

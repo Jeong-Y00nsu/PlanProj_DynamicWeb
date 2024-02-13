@@ -1,0 +1,11 @@
+CREATE DATABASE Members DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+USE Members;
+CREATE TABLE Member (
+	firstName VARCHAR(100) NOT NULL,
+	lastName VARCHAR(100) NOT NULL,
+	birth VARCHAR(100) NOT NULL,
+	telephone_number VARCHAR(100) NOT NULL,
+	id CHAR(100) NOT NULL,
+	CONSTRAINT MemberPk PRIMARY key(id)
+) CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

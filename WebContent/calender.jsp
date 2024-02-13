@@ -84,7 +84,7 @@
         <table width="100%" border="0" cellspacing="1" cellpadding="1">
             <tr>
                 <td align ="right">
-                    <input type="button" onclick="javascript:location.href='<c:url value='/CalendarExam2.jsp' />'" value="오늘"/>
+                    <input type="button" onclick="javascript:location.href='<c:url value='/calender.jsp' />'" value="오늘"/>
                 </td>
 
             </tr>

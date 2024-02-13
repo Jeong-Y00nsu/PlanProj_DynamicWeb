@@ -29,10 +29,10 @@ public class Get_All_Members extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 
 		if (members.size() != 0) {
-			writer.println("<html><body><table><th>����</th>");
-			writer.println("<th>�̸�</th>");
-			writer.println("<th>�������</th>");
-			writer.println("<th>��ȭ��ȣ</th>");
+			writer.println("<html><body><table><th>순서</th>");
+			writer.println("<th>이름</th>");
+			writer.println("<th>생년월일</th>");
+			writer.println("<th>전화번호</th>");
 
 			for (Member member : members) {
 				writer.println("<tr><td>" + (++i) + "</td>");

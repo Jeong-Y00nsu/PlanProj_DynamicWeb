@@ -8,7 +8,7 @@
 </head>
 <body>
   <p>회원 정보 관리</p>
-  <p>update date: 2021/09/21</p>
+  <p>update date: 2024/02/13</p>
   <p> </p>
   <form method="post" action="add">
   	<p> 회원 추가 </p>

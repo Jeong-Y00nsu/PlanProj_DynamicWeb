@@ -1,0 +1,12 @@
+CREATE DATABASE UserTable DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+USE UserTable;
+
+CREATE TABLE UserTable (
+    id VARCHAR(100) NOT NULL,
+    pw VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    planId VARCHAR(100) NOT NULL,
+    salt VARCHAR(100) NOT NULL,
+    CONSTRAINT UserPk PRIMARY key(id)
+) CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
