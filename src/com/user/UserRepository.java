@@ -1,27 +1,25 @@
 package com.user;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import com.util.ObjectRepository;
 
-public class UserRepository {
-    public static Connection getConnection() {
-        Connection conn = null;
-        String url = "jdbc:mysql://localhost/Members";//jdbc:mysql://192.168.200.166:3306/CLIENT
-        String id = "root";
-        String pw = "Zone@0225#mysql";
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn =  DriverManager.getConnection(url, id, pw);
-        } catch (Exception e) {
+public class UserRepository extends ObjectRepository {
 
-            e.printStackTrace();
-            System.out.println("Members_DAO.getConnection() : " + e.toString());
 
-            return null;
-        }
-        return conn;
+    public UserRepository() {
+        super("UserTable");
     }
 
-
+    @Override
+    protected Object translateToObject(ResultSet rs) throws SQLException {
+        User user = new User();
+        user.setId(rs.getString("id"));
+        user.setPw(rs.getString("pw"));
+        user.setName(rs.getString("name"));
+        user.setPlanId(rs.getString("planId"));
+        user.setSalt(rs.getString("salt"));
+        return user;
+    }
 }

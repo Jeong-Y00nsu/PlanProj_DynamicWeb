@@ -1,13 +1,25 @@
 package com.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ObjectRepository {
+
+    static final Logger logger = LoggerFactory.getLogger(ObjectRepository.class);
+
+    private static String dbTableName;
+
+    public ObjectRepository(String dbTableName){
+        this.dbTableName = dbTableName;
+    }
+
     public static Connection getConnection() {
         Connection conn = null;
-        String url = "jdbc:mysql://localhost/Members";//jdbc:mysql://192.168.200.166:3306/CLIENT
+        String url = "jdbc:mysql://localhost/"+dbTableName;//jdbc:mysql://192.168.200.166:3306/CLIENT
         String id = "root";
         String pw = "Zone@0225#mysql";
 
@@ -17,7 +29,7 @@ public abstract class ObjectRepository {
         } catch (Exception e) {
 
             e.printStackTrace();
-            System.out.println("Members_DAO.getConnection() : " + e.toString());
+            logger.info("Members_DAO.getConnection() : {}", e.toString());
 
             return null;
         }
@@ -37,7 +49,7 @@ public abstract class ObjectRepository {
             rs = stmt.executeQuery(query);
 
             while(rs.next()){
-                results.add(translateToObject());
+                results.add(translateToObject(rs));
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -56,7 +68,7 @@ public abstract class ObjectRepository {
         return results;
     }
 
-    protected abstract Object translateToObject();
+    protected abstract Object translateToObject(ResultSet rs) throws SQLException;
 
     public List<Object> selectByElement(String query, String element){
         List<Object> results = new ArrayList<>();
@@ -71,7 +83,7 @@ public abstract class ObjectRepository {
             rs = stmt.executeQuery();
 
             while(rs.next()){
-                results.add(translateToObject());
+                results.add(translateToObject(rs));
             }
         } catch(SQLException e) {
             e.printStackTrace();
@@ -90,4 +102,71 @@ public abstract class ObjectRepository {
         return results;
     }
 
+    public void InsertElement(String query, Object element){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try{
+            conn = getConnection();
+            stmt = conn.prepareStatement(query);
+
+            int result = stmt.executeUpdate(query);
+        } catch ( Exception e){
+            e.printStackTrace();
+            logger.info("Insert Fail");
+        } finally{
+            try {
+                if(stmt!=null&&!stmt.isClosed()) {
+                    stmt.close();
+                }
+            }catch(Exception e1) {
+                logger.info("DataBase Not Closed");
+                System.exit(0);
+            }
+            try {
+                if(conn!=null) {
+                    conn.close();
+                }
+            }catch(SQLException e1) {
+                logger.info("DataBase Not Disconnected");
+                System.exit(0);
+            }
+        }
+    }
+
+    public void DeleteElement(String query, String key){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        logger.debug("delete element = {}",key);
+
+        try{
+            conn = getConnection();
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1,key);
+
+            int result = stmt.executeUpdate();
+
+        } catch (SQLException e){
+            logger.info("Delete fail");
+            e.printStackTrace();
+        } finally{
+            try {
+                if(stmt!=null&&!stmt.isClosed()) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                logger.info("DataBase Not Closed");
+                System.exit(0);
+            }
+            try {
+                if(conn!=null) {
+                    conn.close();
+                }
+            }catch(SQLException e1) {
+                logger.info("DataBase Not Disconnected");
+                System.exit(0);
+            }
+        }
+    }
 }
