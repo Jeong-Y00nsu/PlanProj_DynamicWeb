@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class PlanRepository  extends ObjectRepository {
+
     public PlanRepository() {
         super("UserTable");
     }
