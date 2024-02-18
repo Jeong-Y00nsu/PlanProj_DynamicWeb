@@ -1,236 +1,81 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Calendar"%>
-<%@ page contentType="text/html; charset=utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+    <title>calendar</title>
+</head>
+<body>
 <%
-    Calendar cal = Calendar.getInstance();
-
-    String strYear = request.getParameter("year");
-    String strMonth = request.getParameter("month");
-
-    int year = cal.get(Calendar.YEAR);
-    int month = cal.get(Calendar.MONTH);
-    int date = cal.get(Calendar.DATE);
-
-    if(strYear != null)
-    {
-        year = Integer.parseInt(strYear);
-        month = Integer.parseInt(strMonth);
-
-    }else{
-
+    java.util.Calendar cal=java.util.Calendar.getInstance(); //Calendar∞¥√º calª˝º∫
+    int currentYear=cal.get(java.util.Calendar.YEAR); //«ˆ¿Á ≥Ø¬• ±‚æÔ
+    int currentMonth=cal.get(java.util.Calendar.MONTH);
+    int currentDate=cal.get(java.util.Calendar.DATE);
+    String Year=request.getParameter("year"); //≥™≈∏≥ª∞Ì¿⁄ «œ¥¬ ≥Ø¬•
+    String Month=request.getParameter("month");
+    int year, month;
+    if(Year == null && Month == null){ //√≥¿Ω »£√‚«ﬂ¿ª ∂ß
+        year=currentYear;
+        month=currentMonth;
     }
-//ÎÖÑÎèÑ/Ïõî ÏÖãÌåÖ
-    cal.set(year, month, 1);
-
-    int startDay = cal.getMinimum(java.util.Calendar.DATE);
-    int endDay = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
-    int start = cal.get(java.util.Calendar.DAY_OF_WEEK);
-    int newLine = 0;
-
-//Ïò§Îäò ÎÇ†Ïßú Ï†ÄÏû•.
-    Calendar todayCal = Calendar.getInstance();
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyMMdd");
-    int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
-
-
+    else { //≥™≈∏≥ª∞Ì¿⁄ «œ¥¬ ≥Ø¬•∏¶ º˝¿⁄∑Œ ∫Ø»Ø
+        year=Integer.parseInt(Year);
+        month=Integer.parseInt(Month);
+        if(month<0) { month=11; year=year-1; } //1ø˘∫Œ≈Õ 12ø˘±Ó¡ˆ π¸¿ß ¡ˆ¡§.
+        if(month>11) { month=0; year=year+1; }
+    }
 %>
-<html lang="ko">
-<HEAD>
-    <TITLE>Ï∫òÎ¶∞Îçî</TITLE>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-
-    <script type="text/javaScript" language="javascript">
-
-
-
-    </script>
-    <style TYPE="text/css">
-        body {
-            scrollbar-face-color: #F6F6F6;
-            scrollbar-highlight-color: #bbbbbb;
-            scrollbar-3dlight-color: #FFFFFF;
-            scrollbar-shadow-color: #bbbbbb;
-            scrollbar-darkshadow-color: #FFFFFF;
-            scrollbar-track-color: #FFFFFF;
-            scrollbar-arrow-color: #bbbbbb;
-            margin-left:"0px"; margin-right:"0px"; margin-top:"0px"; margin-bottom:"0px";
-        }
-
-        td {font-family: "ÎèãÏõÄ"; font-size: 9pt; color:#595959;}
-        th {font-family: "ÎèãÏõÄ"; font-size: 9pt; color:#000000;}
-        select {font-family: "ÎèãÏõÄ"; font-size: 9pt; color:#595959;}
-
-
-        .divDotText {
-            overflow:hidden;
-            text-overflow:ellipsis;
-        }
-
-        A:link { font-size:9pt; font-family:"ÎèãÏõÄ";color:#000000; text-decoration:none; }
-        A:visited { font-size:9pt; font-family:"ÎèãÏõÄ";color:#000000; text-decoration:none; }
-        A:active { font-size:9pt; font-family:"ÎèãÏõÄ";color:red; text-decoration:none; }
-        A:hover { font-size:9pt; font-family:"ÎèãÏõÄ";color:red;text-decoration:none;}
-
-
-    </style>
-</HEAD>
-<BODY>
-<form name="calendarFrm" id="calendarFrm" action="" method="post">
-    <DIV id="content" style="width:712px;">
-
-        <table width="100%" border="0" cellspacing="1" cellpadding="1">
-            <tr>
-                <td align ="right">
-                    <input type="button" onclick="javascript:location.href='<c:url value='/calender.jsp' />'" value="Ïò§Îäò"/>
-                </td>
-
-            </tr>
-        </table>
-        <!--ÎÇ†Ïßú ÎÑ§ÎπÑÍ≤åÏù¥ÏÖò  -->
-        <table width="100%" border="0" cellspacing="1" cellpadding="1" id="KOO" bgcolor="#F3F9D7" style="border:1px solid #CED99C">
-
-            <tr>
-                <td height="60">
-
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <td height="10">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td align="center" >
-                                <a href="<c:url value='/calender.jsp' />?year=<%=year-1%>&amp;month=<%=month%>" target="_self">
-                                    <b>&lt;&lt;</b><!-- Ïù¥Ï†ÑÌï¥ -->
-                                </a>
-                                <%if(month > 0 ){ %>
-                                <a href="<c:url value='/calender.jsp' />?year=<%=year%>&amp;month=<%=month-1%>" target="_self">
-                                    <b>&lt;</b><!-- Ïù¥Ï†ÑÎã¨ -->
-                                </a>
-                                <%} else {%>
-                                <b>&lt;</b>
-                                <%} %>
-                                &nbsp;&nbsp;
-                                <%=year%>ÎÖÑ
-
-                                <%=month+1%>Ïõî
-                                &nbsp;&nbsp;
-                                <%if(month < 11 ){ %>
-                                <a href="<c:url value='/calender.jsp' />?year=<%=year%>&amp;month=<%=month+1%>" target="_self">
-                                    <!-- Îã§ÏùåÎã¨ --><b>&gt;</b>
-                                </a>
-                                <%}else{%>
-                                <b>&gt;</b>
-                                <%} %>
-                                <a href="<c:url value='/calender.jsp' />?year=<%=year+1%>&amp;month=<%=month%>" target="_self">
-                                    <!-- Îã§ÏùåÌï¥ --><b>&gt;&gt;</b>
-                                </a>
-                            </td>
-                        </tr>
-                    </table>
-
-                </td>
-            </tr>
-        </table>
-        <br>
-        <table border="0" cellspacing="1" cellpadding="1" bgcolor="#FFFFFF">
-            <THEAD>
-            <TR bgcolor="#CECECE">
-                <TD width='100px'>
-                    <DIV align="center"><font color="red">Ïùº</font></DIV>
-                </TD>
-                <TD width='100px'>
-                    <DIV align="center">Ïõî</DIV>
-                </TD>
-                <TD width='100px'>
-                    <DIV align="center">Ìôî</DIV>
-                </TD>
-                <TD width='100px'>
-                    <DIV align="center">Ïàò</DIV>
-                </TD>
-                <TD width='100px'>
-                    <DIV align="center">Î™©</DIV>
-                </TD>
-                <TD width='100px'>
-                    <DIV align="center">Í∏à</DIV>
-                </TD>
-                <TD width='100px'>
-                    <DIV align="center"><font color="#529dbc">ÌÜ†</font></DIV>
-                </TD>
-            </TR>
-            </THEAD>
-            <TBODY>
-            <TR>
-                <%
-
-                    //Ï≤òÏùå ÎπàÍ≥µÎûÄ ÌëúÏãú
-                    for(int index = 1; index < start ; index++ )
-                    {
-                        out.println("<TD >&nbsp;</TD>");
-                        newLine++;
+<center>
+    <table border=0> <!-- ¥ﬁ∑¬ ªÛ¥‹ ∫Œ∫– -->
+        <tr>
+            <td align=left width=200> <!-- ≥‚ µµ-->
+                <a href="calendar.jsp?year=<%out.print(year-1);%>&month=<%out.print(month);%>">¢∏</a>
+                <% out.print(year); %>≥‚
+                <a href="calendar.jsp?year=<%out.print(year+1);%>&month=<%out.print(month);%>">¢∫</a>
+            </td>
+            <td align=center width=300> <!-- ø˘ -->
+                <a href="calendar.jsp?year=<%out.print(year);%>&month=<%out.print(month-1);%>">¢∏</a>
+                <% out.print(month+1); %>ø˘
+                <a href="calendar.jsp?year=<%out.print(year);%>&month=<%out.print(month+1);%>">¢∫</a>
+            </td>
+            <td align=right width=200><% out.print(currentYear + "-" + (currentMonth+1) + "-" + currentDate); %></td>
+        </tr>
+    </table>
+    <table border=1 cellspacing=0> <!-- ¥ﬁ∑¬ ∫Œ∫– -->
+        <tr>
+            <td width=100>¿œ</td> <!-- ¿œ=1 -->
+            <td width=100>ø˘</td> <!-- ø˘=2 -->
+            <td width=100>»≠</td> <!-- »≠=3 -->
+            <td width=100>ºˆ</td> <!-- ºˆ=4 -->
+            <td width=100>∏Ò</td> <!-- ∏Ò=5 -->
+            <td width=100>±›</td> <!-- ±›=6 -->
+            <td width=100>≈‰</td> <!-- ≈‰=7 -->
+        </tr>
+        <tr height=30>
+            <%
+                cal.set(year, month, 1); //«ˆ¿Á ≥Ø¬•∏¶ «ˆ¿Á ø˘¿« 1¿œ∑Œ º≥¡§
+                int startDay=cal.get(java.util.Calendar.DAY_OF_WEEK); //«ˆ¿Á≥Ø¬•(1¿œ)¿« ø‰¿œ
+                int end=cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH); //¿Ã ¥ﬁ¿« ≥°≥™¥¬ ≥Ø
+                int br=0; //7¿œ∏∂¥Ÿ ¡Ÿ πŸ≤Ÿ±‚
+                for(int i=0; i<(startDay-1); i++) { //∫Ûƒ≠√‚∑¬
+                    out.println("<td>&nbsp;</td>");
+                    br++;
+                    if((br%7)==0) {
+                        out.println("<br>");
                     }
-
-                    for(int index = 1; index <= endDay; index++)
-                    {
-                        String color = "";
-
-                        if(newLine == 0){			color = "RED";
-                        }else if(newLine == 6){ 	color = "#529dbc";
-                        }else{						color = "BLACK"; };
-
-                        String sUseDate = Integer.toString(year);
-
-                        sUseDate += Integer.toString(month+1).length() == 1 ? "0" + Integer.toString(month+1) : Integer.toString(month+1);
-                        sUseDate += Integer.toString(index).length() == 1 ? "0" + Integer.toString(index) : Integer.toString(index);
-
-                        int iUseDate = Integer.parseInt(sUseDate);
-
-
-                        String backColor = "#EFEFEF";
-                        if(iUseDate == intToday ) {
-                            backColor = "#c9c9c9";
-                        }
-                        out.println("<TD valign='top' align='left' height='92px' bgcolor='"+backColor+"' nowrap>");
-                %>
-                <font color='<%=color%>'>
-                    <%=index %>
-                </font>
-
-                <%
-
-                        out.println("<BR>");
-                        out.println(iUseDate);
-                        out.println("<BR>");
-
-
-                        //Í∏∞Îä• Ï†úÍ±∞
-                        out.println("</TD>");
-                        newLine++;
-
-                        if(newLine == 7)
-                        {
-                            out.println("</TR>");
-                            if(index <= endDay)
-                            {
-                                out.println("<TR>");
-                            }
-                            newLine=0;
-                        }
+                }
+                for(int i=1; i<=end; i++) { //≥Ø¬•√‚∑¬
+                    out.println("<td>" + i + "</td>");
+                    br++;
+                    if((br%7)==0 && i!=end) {
+                        out.println("</tr><tr height=30>");
                     }
-                    while(newLine > 0 && newLine < 7)
-                    {
-                        out.println("<TD>&nbsp;</TD>");
-                        newLine++;
-                    }
-                %>
-            </TR>
-
-            </TBODY>
-        </TABLE>
-    </DIV>
-</form>
-</BODY>
-</HTML>
+                }
+                while((br++)%7!=0) //∏ª¿œ ¿Ã»ƒ ∫Ûƒ≠√‚∑¬
+                    out.println("<td>&nbsp;</td>");
+            %>
+        </tr>
+    </table>
+</center>
+</body>
+</html>
