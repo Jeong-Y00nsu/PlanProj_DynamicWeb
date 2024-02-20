@@ -102,15 +102,18 @@ public abstract class ObjectRepository {
         return results;
     }
 
-    public void InsertElement(String query, Object element){
+    public void insertElement(String query, Object element){
         Connection conn = null;
         PreparedStatement stmt = null;
 
         try{
             conn = getConnection();
             stmt = conn.prepareStatement(query);
+            stmt = prepareInsertQuery(stmt,element);
 
             int result = stmt.executeUpdate(query);
+            if (result > 0) logger.info("insert success");
+            else logger.info("insert fail");
         } catch ( Exception e){
             e.printStackTrace();
             logger.info("Insert Fail");
@@ -134,7 +137,9 @@ public abstract class ObjectRepository {
         }
     }
 
-    public void DeleteElement(String query, String key){
+    protected abstract PreparedStatement prepareInsertQuery(PreparedStatement stmt, Object object) throws SQLException;
+
+    public void deleteElement(String query, String key){
         Connection conn = null;
         PreparedStatement stmt = null;
 
@@ -146,7 +151,8 @@ public abstract class ObjectRepository {
             stmt.setString(1,key);
 
             int result = stmt.executeUpdate();
-
+            if (result > 0) logger.info("delete success");
+            else logger.info("delete fail");
         } catch (SQLException e){
             logger.info("Delete fail");
             e.printStackTrace();
@@ -169,4 +175,41 @@ public abstract class ObjectRepository {
             }
         }
     }
+
+    public void updateElement(String query, Object element, String key){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try{
+            conn = getConnection();
+            stmt = conn.prepareStatement(query);
+            stmt = prepareUpdateQuery(stmt,element,key);
+
+            int result = stmt.executeUpdate(query);
+            if (result > 0) logger.info("update success");
+            else logger.info("update fail");
+        } catch ( Exception e){
+            e.printStackTrace();
+            logger.info("update Fail");
+        } finally{
+            try {
+                if(stmt!=null&&!stmt.isClosed()) {
+                    stmt.close();
+                }
+            }catch(Exception e1) {
+                logger.info("DataBase Not Closed");
+                System.exit(0);
+            }
+            try {
+                if(conn!=null) {
+                    conn.close();
+                }
+            }catch(SQLException e1) {
+                logger.info("DataBase Not Disconnected");
+                System.exit(0);
+            }
+        }
+    }
+
+    protected abstract PreparedStatement prepareUpdateQuery(PreparedStatement stmt, Object object, String key) throws SQLException;
 }

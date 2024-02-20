@@ -3,6 +3,8 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+    <script src="jquery-3.7.1.min.js"></script>
     <title>calendar</title>
 </head>
 <body>
