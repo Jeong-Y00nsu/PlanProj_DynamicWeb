@@ -35,11 +35,20 @@ public class PlanService {
         return result;
     }
 
+    public Plan getPlan(String key){
+        return (Plan)planRepository.selectByElement(PlanDmlConstant.SELECT_PLAN_BY_ID,key).get(0);
+    }
     public Response regPlan(Plan plan){
-        Response result = validationRegParam(plan);
-        if(result.getResult()==Result.INVALID_PARAM) return result;
-        planRepository.insertElement(PlanDmlConstant.INSERT_PLAN,plan);
-        return result;
+        try {
+            Response result = validationRegParam(plan);
+            if (result.getResult() == Result.INVALID_PARAM) return result;
+            plan.setId(makePlanKey());
+            planRepository.insertElement(PlanDmlConstant.INSERT_PLAN, plan);
+            return result;
+        } catch (Exception e){
+            logger.info("[PlanService][regPlan] fail makePlanKey");
+            return new Response(Result.FAIL,"일정 등록 실패");
+        }
     }
 
     private Response validationRegParam(Plan plan){

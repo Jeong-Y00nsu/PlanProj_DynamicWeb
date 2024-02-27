@@ -34,7 +34,7 @@ public class SignIn extends HttpServlet {
 
         Response response = userService.signIn(user);
 
-        if(response.getResult()== Result.OK){
+        if(response.getResult().equals(Result.OK)){
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/plan");
             requestDispatcher.forward(req,res);
         }else {
