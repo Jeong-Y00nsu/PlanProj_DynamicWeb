@@ -9,6 +9,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
@@ -24,10 +26,10 @@ public class AddPage extends HttpServlet {
     }
 
     @Override
-    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         logger.debug("[AddPage][service] 추가 페이지 진입");
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("addPlan");
-        requestDispatcher.forward(req,res);
+        requestDispatcher.forward(req,resp);
     }
 }

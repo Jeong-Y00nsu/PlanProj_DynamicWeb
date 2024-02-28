@@ -7,11 +7,10 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -31,7 +30,7 @@ public class ModifyPlan extends HttpServlet {
     }
 
     @Override
-    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
 
         Plan plan = new Plan();
@@ -45,18 +44,18 @@ public class ModifyPlan extends HttpServlet {
 
         if(response.getResult().equals(Result.OK)){
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("plan");
-            requestDispatcher.forward(req,res);
+            requestDispatcher.forward(req,resp);
         } else if(response.getResult().equals(Result.INVALID_PARAM)){
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("updatePlan");
             HttpServletRequest request = (HttpServletRequest) req;
             request.setAttribute("result",response.getResult());
-            requestDispatcher.forward(request,res);
+            requestDispatcher.forward(request,resp);
         }else{
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("updatePlan");
-            requestDispatcher.forward(req,res);
+            requestDispatcher.forward(req,resp);
             HttpServletRequest request = (HttpServletRequest) req;
             request.setAttribute("result","다시 시도해주세요.");
-            requestDispatcher.forward(request,res);
+            requestDispatcher.forward(request,resp);
         }
     }
 }

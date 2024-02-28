@@ -11,6 +11,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name="signIn", value="/signIn")
@@ -25,7 +27,7 @@ public class SignIn extends HttpServlet {
     }
 
     @Override
-    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
 
         User user = new User();
@@ -36,11 +38,11 @@ public class SignIn extends HttpServlet {
 
         if(response.getResult().equals(Result.OK)){
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/plan");
-            requestDispatcher.forward(req,res);
+            requestDispatcher.forward(req,resp);
         }else {
             req.setAttribute("response",response);
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/signIn");
-            requestDispatcher.forward(req,res);
+            requestDispatcher.forward(req,resp);
         }
     }
 }

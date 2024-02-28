@@ -12,6 +12,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
@@ -32,7 +33,7 @@ public class AddPlan extends HttpServlet {
     }
 
     @Override
-    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
 
         Plan plan = new Plan();
@@ -44,18 +45,18 @@ public class AddPlan extends HttpServlet {
         Response response = planService.regPlan(plan);
         if(response.getResult().equals(Result.OK)){
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("plan"); //JSP 경로
-            requestDispatcher.forward(req,res);
+            requestDispatcher.forward(req,resp);
         } else if(response.getResult().equals(Result.INVALID_PARAM)){
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("regPlan");
             HttpServletRequest request = (HttpServletRequest) req;
             request.setAttribute("result",response.getResult());
-            requestDispatcher.forward(request,res);
+            requestDispatcher.forward(request,resp);
         }else{
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("regPlan");
-            requestDispatcher.forward(req,res);
+            requestDispatcher.forward(req,resp);
             HttpServletRequest request = (HttpServletRequest) req;
             request.setAttribute("result","다시 시도해주세요.");
-            requestDispatcher.forward(request,res);
+            requestDispatcher.forward(request,resp);
         }
     }
 }
