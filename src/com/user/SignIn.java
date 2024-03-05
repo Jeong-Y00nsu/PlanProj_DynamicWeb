@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name="signIn", value="/signIn")
@@ -37,6 +38,9 @@ public class SignIn extends HttpServlet {
         Response response = userService.signIn(user);
 
         if(response.getResult().equals(Result.OK)){
+            HttpSession session = req.getSession();
+            session.setAttribute("id",user.getId());
+            session.setAttribute("pw",user.getPw());
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/plan");
             requestDispatcher.forward(req,resp);
         }else {
