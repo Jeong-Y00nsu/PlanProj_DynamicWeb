@@ -20,6 +20,7 @@
             비밀번호: <input type="text" id="repeatPw" name="repeatPw">
             <a>* 재입력한 비밀번호가 일치하지 않습니다. 다시 입력해주세요.</a>
             이름: <input type="text" id="name" name="name">
+            <button type="submit">회원 가입</button>
         </form>
     </div>
 </body>
