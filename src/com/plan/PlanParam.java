@@ -13,6 +13,7 @@ public class PlanParam {
     private int month; // 현재 달
     private int cntOfWeeks; // 현재 달의 주 수
     private int firstDayOfWeek; // 현재 달 첫번째 날의 요일 (0 base)
+    private int lastDay; //마지막 일수
     List<Map<LocalDate, List<Plan>>> plans; // 현재 달 일별 일정 리스트
 
 }
