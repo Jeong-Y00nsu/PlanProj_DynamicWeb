@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-public class PlanParam {
+public class PlanResp {
     
     private int year; //현재 년도
     private int month; // 현재 달
