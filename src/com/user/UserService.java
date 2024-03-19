@@ -16,6 +16,7 @@ public class UserService {
     }
 
     public Response signIn(User user){
+        Response resp = new Response();
         try {
             //검증
             Response response = validationSignInParam(user);
@@ -27,7 +28,9 @@ public class UserService {
             if (user.getId().equals(existUser.getId()) && !user.getPw().equals(existUser.getPw())) {
                 return new Response(Result.ONLY_ID_CORRECT, "PW를 잘못 입력하셨습니다.");
             }
-            return new Response(Result.OK, "OK");
+            resp =  new Response(Result.OK, "OK");
+            resp.setReturnValue(existUser);
+            return resp;
         }catch (Exception e){
             logger.info("[UserService][signIn] fail signIn");
             return new Response(Result.FAIL,"FAIL");

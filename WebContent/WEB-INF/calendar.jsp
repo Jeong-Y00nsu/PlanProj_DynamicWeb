@@ -46,5 +46,9 @@
       </fieldset>
     </div>
   </div>
+  <div>
+    <input type="button" value="일정 추가" id="addPlanBtn" />
+    <input type="button" value="로그아웃" id="logoutBtn" />
+  </div>
 </body>
 </html>

@@ -38,9 +38,13 @@ public class SignIn extends HttpServlet {
         Response response = userService.signIn(user);
 
         if(response.getResult().equals(Result.OK)){
+            User u = (User)response.getReturnValue();
             HttpSession session = req.getSession();
+            //session
             session.setAttribute("id",user.getId());
             session.setAttribute("pw",user.getPw());
+            session.setAttribute("name",u.getName());
+            //forward
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/plan");
             requestDispatcher.forward(req,resp);
         }else {
