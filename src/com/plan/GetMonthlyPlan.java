@@ -15,16 +15,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name="getPlans",value="/getPlans")
-public class GetPlans extends HttpServlet {
+@WebServlet(name="getMonthlyPlan",value="/getMonthlyPlan")
+public class GetMonthlyPlan extends HttpServlet {
 
     private PlanService planService;
 
-    static final Logger logger = LoggerFactory.getLogger(GetPlans.class);
+    static final Logger logger = LoggerFactory.getLogger(GetMonthlyPlan.class);
 
     static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddhh24mm");
 
-    public GetPlans(){
+    public GetMonthlyPlan(){
         super();
         planService = new PlanService(new PlanRepository());
     }
@@ -38,7 +38,7 @@ public class GetPlans extends HttpServlet {
         String year = req.getParameter("year");
         String month = req.getParameter("month");
 
-        List<Map<LocalDate, List<Plan>>> planList = planService.getMonthPlan(year, month);
+        List<Map<LocalDate, List<Plan>>> planList = planService.getMonthlyPlan(year, month);
         req.setAttribute("planList",planList);
 
         requestDispatcher.forward(req,resp);

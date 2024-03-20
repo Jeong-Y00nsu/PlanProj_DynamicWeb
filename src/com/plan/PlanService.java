@@ -18,7 +18,7 @@ public class PlanService {
         this.planRepository = planRepository;
     }
 
-    public List<Map<LocalDate,List<Plan>>> getMonthPlan(String year, String month){
+    public List<Map<LocalDate,List<Plan>>> getMonthlyPlan(String year, String month){
         LocalDate pivot = LocalDate.parse(year+month+"01",DateTimeFormatter.ofPattern("yyyyMMdd").withLocale(Locale.KOREA));
         List<Map<LocalDate, List<Plan>>> result = new ArrayList<>();
 
@@ -33,6 +33,13 @@ public class PlanService {
             result.add(day);
         }
         return result;
+    }
+
+    public List<Plan> getDailyPlan(String year, String month, String day){
+        LocalDate today = LocalDate.parse(year+month+day,DateTimeFormatter.ofPattern("yyyyMMdd").withLocale(Locale.KOREA));
+        List<Plan> dailyPlan = (List<Plan>)(Object)(planRepository.selectByElement(PlanDmlConstant.SELECT_PLAN_BY_DAY,today.toString()));
+
+        return dailyPlan;
     }
 
     public Plan getPlan(String key){

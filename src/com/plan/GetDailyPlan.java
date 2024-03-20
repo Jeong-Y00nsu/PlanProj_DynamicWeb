@@ -11,17 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
-@WebServlet(name="getPlan", value="/getPlan")
-public class GetPlan extends HttpServlet {
-
+@WebServlet(name="getDailyPlan",value="/getDailyPlan")
+public class GetDailyPlan extends HttpServlet {
     private PlanService planService;
 
-    static final Logger logger = LoggerFactory.getLogger(GetPlan.class);
+    static final Logger logger = LoggerFactory.getLogger(ModifyPlan.class);
 
     static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddhh24mm");
 
-    public GetPlan(){
+    public GetDailyPlan(){
         super();
         planService = new PlanService(new PlanRepository());
     }
@@ -30,11 +30,14 @@ public class GetPlan extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
 
-        String planId = req.getParameter("planId");
+        String year = req.getParameter("year");
+        String month = req.getParameter("month");
+        String day = req.getParameter("day");
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/plan.jsp");
-        Plan plan = planService.getPlan(planId);
-        req.setAttribute("plan",plan);
-        requestDispatcher.forward(req,resp);
+        List<Plan> plans = planService.getDailyPlan(year,month,day);
+        HttpServletRequest request = (HttpServletRequest) req;
+        request.setAttribute("plans",plans);
+        requestDispatcher.forward(request,resp);
     }
 }
