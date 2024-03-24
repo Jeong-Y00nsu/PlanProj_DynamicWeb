@@ -63,7 +63,7 @@ function displayMonthCalendar(planParam){
 function getThisMonth(year, month){
     return $.ajax({
         method: 'POST',
-        url: '/',
+        url: '/getMonthlyPlan',
         beforeSend: function(xhr) {
             xhr.setRequestHeader("Accept", "application/json")
         },
@@ -82,7 +82,7 @@ function eventBinding() {
         tdEls.forEach(tdEl => {
             tdEl.addEventListener('click',function(){
                 // ajax
-                fetch('/getPlan',{
+                fetch('/getDailyPlan',{
                     method: 'POST',
                     headears: {
                         'Content-Type': 'application/json'
@@ -102,7 +102,7 @@ function eventBinding() {
         };
         return $.ajax({
             method: 'POST',
-            url: '/getPlans',
+            url: '/getMonthlyPlan',
             data: JSON.stringify(param),
             contentType: 'application/json; charset=UTF-8'
         }).then(function(planParam){
@@ -118,7 +118,7 @@ function eventBinding() {
         };
         return $.ajax({
             method: 'POST',
-            url: '/getPlans',
+            url: '/getMonthlyPlan',
             data: JSON.stringify(param),
             contentType: 'application/json; charset=UTF-8'
         }).then(function(planParam){
@@ -134,7 +134,7 @@ function eventBinding() {
         };
         return $.ajax({
             method: 'POST',
-            url: '/getPlans',
+            url: '/getMonthlyPlan',
             data: JSON.stringify(param),
             contentType: 'application/json; charset=UTF-8'
         }).then(function(planParam){
@@ -150,7 +150,7 @@ function eventBinding() {
         };
         return $.ajax({
             method: 'POST',
-            url: '/getPlans',
+            url: '/getMonthlyPlan',
             data: JSON.stringify(param),
             contentType: 'application/json; charset=UTF-8'
         }).then(function(planParam){

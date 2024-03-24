@@ -11,16 +11,21 @@
     <title>SignUp</title>
 </head>
 <body>
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/signUp.js"></script>
+    <script src="/js/util.js"></script>
     <div class ="signUp">
         <form id="signUpForm" action="/signUp">
             <h1>회원 가입</h1>
             아이디: <input type="text" id="id" name="id">
+            <a id="idMessage"></a>
             <input type="button" id="checkDuplicateId" value="ID중복체크" onclick="">
             비밀번호: <input type="text" id="pw" name="pw">
             비밀번호: <input type="text" id="repeatPw" name="repeatPw">
-            <a>* 재입력한 비밀번호가 일치하지 않습니다. 다시 입력해주세요.</a>
+            <a id="pwMessage"></a>
             이름: <input type="text" id="name" name="name">
-            <button type="submit">회원 가입</button>
+            <input type="button" value="회원 가입" id="signUpBtn"/>
+            <a id="nameMessage"></a>
         </form>
     </div>
 </body>

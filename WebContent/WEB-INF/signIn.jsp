@@ -15,6 +15,9 @@
 </head>
 
 <body>
+<script src="/js/jquery-3.7.1.min.js"></script>
+<script src="/js/signIn.js"></script>
+<script src="/js/util.js"></script>
 <div class="login">
     <form id="loginForm" action="/signIn" method="post">
         <h1>로그인 </h1>
