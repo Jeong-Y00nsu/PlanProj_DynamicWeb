@@ -74,7 +74,7 @@ The CDN directory has the following structure.
   ├─ calendar/
   │  ├─ latest
   │  │  ├─ toastui-calendar.css
-  │  │  ├─ toastui-calendar.js
+  │  │  ├─ toastui-getMonthlyPlan.js
   │  │  ├─ toastui-calendar.min.css
   │  │  ├─ toastui-calendar.min.js
   │  │  ├─ toastui-calendar.ie11.js

@@ -10235,7 +10235,7 @@ module.exports = Week;
 
 /***/ "./src/js/factory/calendar.js":
 /*!************************************!*\
-  !*** ./src/js/factory/calendar.js ***!
+  !*** ./src/js/factory/getMonthlyPlan.js ***!
   \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -28561,4 +28561,4 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_tui_date_picker__;
 
 /******/ });
 });
-//# sourceMappingURL=tui-calendar.js.map
+//# sourceMappingURL=tui-getMonthlyPlan.js.map

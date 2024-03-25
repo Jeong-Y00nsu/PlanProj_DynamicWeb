@@ -31,14 +31,14 @@
     <table border=0> <!-- 달력 상단 부분 -->
         <tr>
             <td align=left width=200> <!-- 년 도-->
-                <a href="calendar.jsp?year=<%out.print(year-1);%>&month=<%out.print(month);%>">◀</a>
+                <a href="getMonthlyPlan.jsp?year=<%out.print(year-1);%>&month=<%out.print(month);%>">◀</a>
                 <% out.print(year); %>년
-                <a href="calendar.jsp?year=<%out.print(year+1);%>&month=<%out.print(month);%>">▶</a>
+                <a href="getMonthlyPlan.jsp?year=<%out.print(year+1);%>&month=<%out.print(month);%>">▶</a>
             </td>
             <td align=center width=300> <!-- 월 -->
-                <a href="calendar.jsp?year=<%out.print(year);%>&month=<%out.print(month-1);%>">◀</a>
+                <a href="getMonthlyPlan.jsp?year=<%out.print(year);%>&month=<%out.print(month-1);%>">◀</a>
                 <% out.print(month+1); %>월
-                <a href="calendar.jsp?year=<%out.print(year);%>&month=<%out.print(month+1);%>">▶</a>
+                <a href="getMonthlyPlan.jsp?year=<%out.print(year);%>&month=<%out.print(month+1);%>">▶</a>
             </td>
             <td align=right width=200><% out.print(currentYear + "-" + (currentMonth+1) + "-" + currentDate); %></td>
         </tr>

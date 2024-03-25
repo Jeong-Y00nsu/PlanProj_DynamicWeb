@@ -22,16 +22,12 @@
     <form id="loginForm" action="/signIn" method="post">
         <h1>로그인 </h1>
         아이디: <input type="text" name="id" placeholder="아이디"></br>
+        <a id="idMessage"></a>
         비밀번호: <input type="text" id="pw" name="password" placeholder="비밀번호">
-        <button type="submit">로그인</button>
-        <input type="button" id="signUp" name="signUp" value="회원가입" onclick="signUp()">
+        <a id="pwMessage"></a>
+        <input type="button" id="signInBtn" name="signInBtn" value="로그인"/>
+        <input type="button" id="signUpBtn" name="signUpBtn" value="회원가입"/>
     </form>
 </div>
 </body>
-<script type="text/javascript">
-    function signUp(){
-        document.getElementById("loginForm").action = '/signUpPage';
-        document.getElementById("loginForm").submit();
-    }
-</script>
 </html>

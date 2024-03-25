@@ -131,7 +131,7 @@ Insert JavaScript file
 <script src="https://uicdn.toast.com/tui.code-snippet/v1.5.2/tui-code-snippet.min.js"></script>
 <script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.min.js"></script>
 <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.min.js"></script>
-<script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
+<script src="https://uicdn.toast.com/tui-calendar/latest/tui-getMonthlyPlan.js"></script>
 ```
 
 If you want to use a specific version, use the tag name instead of `latest` in the url's path.
@@ -141,7 +141,7 @@ The CDN directory has the following structure.
 ```
 tui-calendar/
 ├─ latest/
-│  ├─ tui-calendar.js
+│  ├─ tui-getMonthlyPlan.js
 │  └─ tui-calendar.min.js
 │  └─ tui-calendar.css
 │  └─ tui-calendar.min.css

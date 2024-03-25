@@ -12,11 +12,11 @@
 
 <html>
 <head>
-    <title>Calendar</title>
+    <title>월별 일정</title>
 </head>
 <body>
   <script src="/js/jquery-3.7.1.min.js"></script>
-  <script src="/js/calendar.js"></script>
+  <script src="/js/getMonthlyPlan.js"></script>
   <div class="planDiv">
     <div class="plans">
       <h1>일정</h1>

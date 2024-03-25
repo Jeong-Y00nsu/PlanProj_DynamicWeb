@@ -81,18 +81,18 @@ function eventBinding() {
 
         tdEls.forEach(tdEl => {
             tdEl.addEventListener('click',function(){
-                // ajax
-                fetch('/getDailyPlan',{
-                    method: 'POST',
-                    headears: {
-                        'Content-Type': 'application/json'
-                    },
-                    data: JSON.stringify({data: this.textContent}),
-                }).then(res => res.json()).then(data => {
-                    // 응답 이후 뭘 하지
-                }).catch(error => {console.error('Error:', error);})
-            })
-        })
+                    // ajax
+                    fetch('/getDailyPlan',{
+                        method: 'POST',
+                        headears: {
+                            'Content-Type': 'application/json'
+                        },
+                        data: JSON.stringify({data: this.textContent}),
+                    }).then(res => res.json()).then(data => {
+                        // 응답 이후 뭘 하지
+                    }).catch(error => {console.error('Error:', error);})
+            });
+        });
     });
 
     $("#preYearBtn").click(function(){
