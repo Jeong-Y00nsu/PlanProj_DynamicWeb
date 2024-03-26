@@ -11,6 +11,10 @@
     <title>일정 수정</title>
 </head>
 <body>
+<script src="/js/jquery-3.7.1.min.js"></script>
+<script src="/js/addPlan.js"></script>
+<script src="/lib/tui-date-picker/dist/tui-date-picker.js"></script>
+<script src="/lib/tui-date-picker/dist/tui-date-picker.css"></script>
 <div class  = "editPlan">
     <form id="editPlan" action="/modifyPlan">
         <h1>일정 수정</h1>

@@ -15,13 +15,42 @@
 </head>
 <body>
     <script src="/js/jquery-3.7.1.min.js"></script>
-    <script src="/js/addPlan.js"></script>
+    <script src="/js/editPlan.js"></script>
+    <script src="/lib/tui-date-picker/dist/tui-date-picker.js"></script>
+    <script src="/lib/tui-date-picker/dist/tui-date-picker.css"></script>
     <div class  = "addPlan">
+        <a id="message"></a>
         <form id="addPlan" action="/addPlan">
             <h1>일정 추가</h1>
-            일정명: <input type="text" id="planName" name="planName">
-            시작일: <input type="text" id="startDt" name="startDt">
-            종료일: <input type="text" id="endDt" name="endDt">
+            일정명: <input type="text" id="title" name="title"/>
+            <div id="tuiDatePickerDiv">
+                <table style="width: 650px;">
+                    <thead>
+                    <tr>
+                        <td><h3>시작일</h3></td>
+                        <td><h3>종료일</h3></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="tui-datepicker-input tui-datetime-input tui-has-focus">
+                                <input type="text" id="startDt" aria-label="Date-Time">
+                                <span class="tui-ico-date"></span>
+                            </div>
+                            <div id="wrapper" style="margin-top: -1px;"></div>
+                        </td>
+                        <td>
+                            <div class="tui-datepicker-input tui-datetime-input tui-has-focus">
+                                <input type="text" id="endDt" aria-label="Date-Time">
+                                <span class="tui-ico-date"></span>
+                            </div>
+                            <div id="wrapper-2" style="margin-top: -1px;"></div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             메  모: <input type="text" id="text" name="text">
             <input type="button" id="addPlanBtn" value="추가"/>
             <input type="button" id="cancelBtn" value="취소"/>
