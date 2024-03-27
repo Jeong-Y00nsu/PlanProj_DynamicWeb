@@ -48,7 +48,22 @@ function eventBinding(){
             data: JSON.stringify(param),
             contentType: 'application/json; charset=UTF-8'
         });
-    })
+    });
+
+    $('cancelBtn').click(function(){
+        let param ={
+            year: document.getElementById('year').value,
+            month: document.getElementById('month').value,
+            day: document.getElementById('day').value
+        }
+        return $.ajax({
+            method: 'POST',
+            url: '/getDailyPlan',
+            data: JSON.stringify(param),
+            contentType: 'application/json; charset=UTF-8'
+        });
+    });
+
 }
 
 function init(){
@@ -76,6 +91,7 @@ function init(){
             inputType: 'spinbox'
         }
     });
+
 }
 
 $(document).ready(function(){

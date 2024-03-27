@@ -5,7 +5,10 @@
   Time: 오전 6:41
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
     <title>일정 수정</title>
@@ -19,10 +22,37 @@
     <form id="editPlan" action="/modifyPlan">
         <h1>일정 수정</h1>
         일정명: <input type="text" id="planName" name="planName">
-        시작일: <input type="text" id="startDt" name="startDt">
-        종료일: <input type="text" id="endDt" name="endDt">
+        <div id="tuiDatePickerDiv">
+        <table style="width: 650px;">
+            <thead>
+            <tr>
+                <td><h3>시작일</h3></td>
+                <td><h3>종료일</h3></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <div class="tui-datepicker-input tui-datetime-input tui-has-focus">
+                        <input type="text" id="startDt" aria-label="Date-Time">
+                        <span class="tui-ico-date"></span>
+                    </div>
+                    <div id="wrapper" style="margin-top: -1px;"></div>
+                </td>
+                <td>
+                    <div class="tui-datepicker-input tui-datetime-input tui-has-focus">
+                        <input type="text" id="endDt" aria-label="Date-Time">
+                        <span class="tui-ico-date"></span>
+                    </div>
+                    <div id="wrapper-2" style="margin-top: -1px;"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
         메  모: <input type="text" id="text" name="text">
-        <button type="submit">수정</button>
+        <input type="button" id="editPlanBtn" value="수정"/>
+        <input type="button" id="cancelBtn" value="취소"/>
     </form>
 </div>
 </body>

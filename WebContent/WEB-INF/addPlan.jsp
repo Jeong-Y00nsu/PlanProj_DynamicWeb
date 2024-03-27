@@ -21,6 +21,9 @@
     <div class  = "addPlan">
         <a id="message"></a>
         <form id="addPlan" action="/addPlan">
+            <input type="hidden" id="year" name="year"/>
+            <input type="hidden" id="month" name="month"/>
+            <input type="hidden" id="day" name="day"/>
             <h1>일정 추가</h1>
             일정명: <input type="text" id="title" name="title"/>
             <div id="tuiDatePickerDiv">
